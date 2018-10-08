@@ -69,6 +69,7 @@ String OctoprintApi::sendGetToOctoprint(String command) {
     }
     _client->print("X-Api-Key: "); _client->println(_apiKey);
     _client->println("User-Agent: arduino/1.0");
+    _client->println("Connection: close");
     _client->println();
 
     now = millis();
@@ -106,6 +107,9 @@ String OctoprintApi::sendGetToOctoprint(String command) {
 				}else if (c != '\r') {
 					currentLineIsBlank = false;
 				}
+      }
+      if (!_client->connected()) {
+          break;
       }
     }
   }
@@ -338,6 +342,7 @@ String OctoprintApi::sendPostToOctoPrint(String command, char* postData) {
     _client->println("Content-Type: application/json");
     _client->print("X-Api-Key: "); _client->println(_apiKey);
     _client->println("User-Agent: arduino/1.0");
+    _client->println("Connection: close");
     _client->print("Content-Length: ");
     _client->println(strlen(postData));// number of bytes in the payload
     _client->println();// important need an empty line here 
@@ -378,6 +383,9 @@ String OctoprintApi::sendPostToOctoPrint(String command, char* postData) {
 				}else if (c != '\r') {
 					currentLineIsBlank = false;
 				}
+      }
+      if (!_client->connected()) {
+          break;
       }
     }
   }
