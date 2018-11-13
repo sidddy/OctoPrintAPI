@@ -56,7 +56,7 @@ struct printJobCall{
 };
 
 struct printerBedCall{
-  float printerBedTempActual;  
+  float printerBedTempActual;
   float printerBedTempOffset;
   float printerBedTempTarget;
   long printerBedTempHistoryTimestamp;
@@ -97,7 +97,7 @@ class OctoprintApi
 
     bool octoPrintGetPrinterBed();
     printerBedCall printerBed;
-    
+
     bool octoPrintJobStart();
     bool octoPrintJobCancel();
     bool octoPrintJobRestart();
@@ -115,6 +115,7 @@ class OctoprintApi
     const int maxMessageLength = 1000;
     void closeClient();
     int extractHttpCode(String statusCode,String body);
+    String sendRequestToOctoprint(String type, String command, char* data);
 };
 
 #endif
